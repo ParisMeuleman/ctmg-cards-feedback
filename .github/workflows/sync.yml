@@ -1,0 +1,44 @@
+name: Sync feedback board
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (log only, write nothing)'
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ['sync.mjs', 'sync.test.mjs', 'package*.json', '.github/workflows/sync.yml']
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: feedback-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Unit tests
+        run: npm test
+      - name: Sync Firestore ⇄ GitHub issues
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SCTMG_CARDS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BOARD_URL: https://sctmg-cards.web.app/feedback.html
+          AUTO_PUBLISH_AFTER_HOURS: ${{ vars.AUTO_PUBLISH_AFTER_HOURS }}
+          DRY_RUN: ${{ (github.event_name == 'workflow_dispatch' && inputs.dry_run) && '1' || '' }}
+        run: node sync.mjs

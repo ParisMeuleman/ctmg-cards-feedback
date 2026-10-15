@@ -1,0 +1,26 @@
+name: 💡 Feature request
+description: Suggest an improvement for SCTMG Cards.
+title: "[feature] "
+labels: ["type:feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > [!WARNING]
+        > **This repository is PUBLIC.** Never paste beta-only (NDA) content: rules text, stats, names of unreleased units/cards, or screenshots of beta material. Such requests are removed.
+        >
+        > Prefer the moderated board, where others can vote: **https://sctmg-cards.web.app/feedback.html**
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: What would you like, and why?
+    validations:
+      required: true
+  - type: checkboxes
+    id: nda
+    attributes:
+      label: NDA
+      options:
+        - label: This request contains no beta-only / NDA material.
+          required: true

@@ -1,0 +1,31 @@
+name: 🐞 Bug report
+description: Something in SCTMG Cards does not work as expected.
+title: "[bug] "
+labels: ["type:bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        > [!WARNING]
+        > **This repository is PUBLIC.** Never paste beta-only (NDA) content: rules text, stats, names of unreleased units/cards, or screenshots of beta material. Such reports are removed.
+        >
+        > Prefer the moderated board: **https://sctmg-cards.web.app/feedback.html** (reports there are reviewed before they appear and are mirrored here automatically).
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: Page / tab (e.g. Units, Deployments, PDF export), browser, paper format.
+  - type: checkboxes
+    id: nda
+    attributes:
+      label: NDA
+      options:
+        - label: This report contains no beta-only / NDA material.
+          required: true

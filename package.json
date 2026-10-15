@@ -1,0 +1,13 @@
+{
+  "name": "sctmg-cards-feedback-sync",
+  "private": true,
+  "type": "module",
+  "description": "Mirrors the SCTMG Cards feedback board (Firestore) to GitHub issues.",
+  "scripts": {
+    "sync": "node sync.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "firebase-admin": "^14.5.0"
+  }
+}

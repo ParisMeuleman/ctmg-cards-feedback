@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: SCTMG feedback board (moderated, with votes)
+    url: https://sctmg-cards.web.app/feedback.html
+    about: Preferred way to report bugs and suggest features. Approved reports are mirrored here automatically.
